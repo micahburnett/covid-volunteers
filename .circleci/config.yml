@@ -4,7 +4,7 @@ orbs:
 
 jobs:
   build:
-    parallelism: 3
+    parallelism: 1
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
         environment: # environment variables for primary container
