@@ -94,6 +94,8 @@ jobs:
       - run:
           name: Rubocop
           command: |
+            gem install bundler:2.1.4
+            bundle check --path vendor/bundle || bundle install --deployment
             bundle --version
             bundle exec rubocop
 
