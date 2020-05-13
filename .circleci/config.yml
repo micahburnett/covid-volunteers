@@ -74,10 +74,10 @@ jobs:
       - image: circleci/ruby:2.6.3-stretch-node
     steps:
       - checkout
+      - build
       - run:
           name: Run rspec in parallel
           command: |
-            bundle --version
             bundle exec rspec --profile 10 \
                               --out test_results/rspec.xml \
                               --format progress \
@@ -91,19 +91,16 @@ jobs:
       - image: circleci/ruby:2.6.3-stretch-node
     steps:
       - checkout
+      - build
       - run:
           name: Rubocop
           command: |
-            gem install bundler:2.1.4
-            bundle check --path vendor/bundle || bundle install --deployment
-            bundle --version
             bundle exec rubocop
 
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - build
       - test:
           requires:
             - build
